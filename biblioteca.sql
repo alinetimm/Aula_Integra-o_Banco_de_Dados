@@ -11,7 +11,8 @@ CREATE TABLE LIVRO (
     livro_id INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
     ano_publicacao INT,
-    genero VARCHAR(100)
+    genero VARCHAR(100),
+    excluido BOOLEAN DEFAULT FALSE -- Adicionado para exclusão lógica
 );
 CREATE TABLE LIVRO_AUTOR (
     livro_id INT,
@@ -76,4 +77,3 @@ INSERT INTO LIVRO_AUTOR (livro_id, autor_id) VALUES
 (20, 11),
 (21, 12),
 (22, 13);
-
