@@ -17,6 +17,39 @@
                 <input type="text" id="caixaDeBusca" placeholder="Ex: Machado de Assis ou 1984">
                 <button id="botaoDeBusca">Buscar</button>
             </div>
+            
+            <div class="actions-header">
+                <button id="btnNovoLivro">Adicionar Novo Livro</button>
+            </div>
+
+            <div id="formContainer" class="form-container hidden">
+                <h2 id="formTitulo">Adicionar Novo Livro</h2>
+                <form id="livroForm">
+                    <input type="hidden" id="livroId">
+                    <div class="form-group">
+                        <label for="titulo">Título:</label>
+                        <input type="text" id="titulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="autores">IDs dos Autores (separados por vírgula):</label>
+                        <input type="text" id="autores" required placeholder="Ex: 1, 3">
+                        <small>Consulte o banco de dados para os IDs dos autores.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="genero">Gênero:</label>
+                        <input type="text" id="genero">
+                    </div>
+                    <div class="form-group">
+                        <label for="ano">Ano de Publicação:</label>
+                        <input type="number" id="ano">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="btnSalvar">Salvar</button>
+                        <button type="button" id="btnCancelar">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+            
             <div id="resultados">
                 </div>
         </main>
