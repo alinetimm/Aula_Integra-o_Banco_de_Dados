@@ -4,27 +4,25 @@ const mysql = require('mysql2');
 const app = express();
 const port = 3000;
 
-const pool = mysql.createPool({
+const pool = mysql.createPool({ 
     host: 'localhost',
     user: 'root',
-    password: 'aqui vou colocar minha senha', 
+    password: 'n coloca a senha aqui não', 
     database: 'biblioteca',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
-}).promise(); // Adicionando .promise() para usar async/await, que é mais moderno e limpo
+}).promise();
 
-app.get('/api/livros/pesquisar', async (req, res) => {
+app.get('/api/livros/pesquisar', async (req, res) => { 
     try {
         const termo = req.query.termo;
 
         if (!termo) {
-            return res.json([]); // Retorna array vazio se não houver termo
+            return res.json([]); 
         }
 
         const termoDeBusca = `%${termo}%`;
-
-        // A consulta SQL para buscar por título ou autor
         const sql = `
             SELECT 
                 L.titulo, 
@@ -38,11 +36,8 @@ app.get('/api/livros/pesquisar', async (req, res) => {
             GROUP BY L.livro_id
             ORDER BY L.titulo;
         `;
-        
-        // Executa a query e espera o resultado
-        const [results] = await pool.query(sql, [termoDeBusca, termoDeBusca]);
-        
-        // Retorna os resultados em JSON para o frontend
+
+        const [results] = await pool.query(sql, [termoDeBusca, termoDeBusca]);  
         res.json(results);
 
     } catch (err) {
@@ -52,10 +47,9 @@ app.get('/api/livros/pesquisar', async (req, res) => {
     }
 });
 
-// Serve os arquivos estáticos da pasta 'public'
+
 app.use(express.static('public'));
 
-// Inicia o servidor
 app.listen(port, () => {
     console.log(`Servidor da biblioteca rodando em http://localhost:${port}`);
 });

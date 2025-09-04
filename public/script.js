@@ -1,17 +1,16 @@
 const caixaDeBusca = document.getElementById('caixaDeBusca');
 const botaoDeBusca = document.getElementById('botaoDeBusca');
-const resultadosDiv = document.getElementById('resultados');
+const resultadosDiv = document.getElementById('resultados'); 
+const realizarBusca = () => { 
+const termo = caixaDeBusca.value;
 
-const realizarBusca = () => {
-    const termo = caixaDeBusca.value;
-
-    if (termo.length < 2) {
+    if (termo.length < 2) { // Evita buscas com menos de 2 caracteres
         resultadosDiv.innerHTML = '<p>Digite pelo menos 2 caracteres para buscar.</p>';
         return;
     }
 
-    fetch(`/api/livros/pesquisar?termo=${encodeURIComponent(termo)}`)
-        .then(response => response.json())
+    fetch(`/api/livros/pesquisar?termo=${encodeURIComponent(termo)}`) 
+        .then(response => response.json()) // Converte a resposta para JSON
         .then(livros => {
             exibirResultados(livros);
         })
@@ -21,8 +20,8 @@ const realizarBusca = () => {
         });
 };
 
-const exibirResultados = (livros) => {
-    resultadosDiv.innerHTML = ''; // Limpa resultados anteriores
+const exibirResultados = (livros) => { 
+    resultadosDiv.innerHTML = ''; 
 
     if (livros.length === 0) {
         resultadosDiv.innerHTML = '<p>Nenhum livro encontrado para o termo buscado.</p>';
@@ -43,7 +42,6 @@ const exibirResultados = (livros) => {
 };
 
 botaoDeBusca.addEventListener('click', realizarBusca);
-// Permite buscar pressionando Enter na caixa de busca
 caixaDeBusca.addEventListener('keyup', (event) => {
     if (event.key === 'Enter') {
         realizarBusca();
